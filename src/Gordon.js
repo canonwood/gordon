@@ -1,9 +1,10 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, useState } from 'react';
 
 import { Context } from './Router';
 import Button from './com/Button';
 
 function Gordon() {
+  const [message, setMessage] = useState('');
   const { setRoute } = useContext(Context);
 
   return (
@@ -15,8 +16,20 @@ function Gordon() {
       </div>
 
       <div className="flex mx-auto max-w-4xl gordon-height bg-white border">
-        <div className="w-2/3 border-r"></div>
-        <div className="bg-gray-200 h-full w-1/3"></div>
+        <div className="flex flex-col w-2/3 border-r">
+          <div className="flex-1"></div>
+
+          <div className="bg-white border-t px-2 py-2">
+            <textarea
+              className="w-full border px-2 py-1"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Write a message"
+            />
+          </div>
+        </div>
+
+        <div className="bg-gray-100 h-full w-1/3"></div>
       </div>
 
       <div className="mx-auto max-w-4xl text-right">

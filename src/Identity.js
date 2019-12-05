@@ -20,7 +20,24 @@ function Identity() {
   function createOrLogin(e) {
     e.preventDefault();
     setWorking(true);
-    setTimeout(() => setWorking(false), 4000);
+
+    const body = JSON.stringify({
+      username,
+      password,
+    });
+
+    fetch('/identity', { method: 'post', body })
+      .then((response) =>
+        response.status === 200
+          ? Promise.resolve(response)
+          : Promise.reject(new Error(response.statusText)),
+      )
+      .then((response) => response.text())
+      .then(() => setRoute('app'))
+      .catch((e) => {
+        setWorking(false);
+        console.log(e);
+      });
   }
 
   return (

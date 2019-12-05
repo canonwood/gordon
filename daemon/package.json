@@ -1,0 +1,13 @@
+{
+  "name": "daemon",
+  "version": "1.0.0",
+  "description": "Gordon Messaging Daemon",
+  "main": "index.js",
+  "repository": "https://github.com/wraithwood/gordon",
+  "author": "Diego López <lgdiego@outlook.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

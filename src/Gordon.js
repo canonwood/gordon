@@ -1,4 +1,5 @@
-import React, { useContext, Fragment, useState } from 'react';
+import React, { useContext, Fragment, useState, useEffect } from 'react';
+import socketio from 'socket.io-client';
 
 import { Context } from './Router';
 import Button from './com/Button';
@@ -6,6 +7,11 @@ import Button from './com/Button';
 function Gordon() {
   const [message, setMessage] = useState('');
   const { setRoute } = useContext(Context);
+
+  useEffect(() => {
+    const io = socketio();
+    return () => io.close();
+  }, []);
 
   return (
     <Fragment>

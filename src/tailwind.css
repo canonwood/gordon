@@ -5,4 +5,8 @@
   background: #fafafa;
 }
 
+.gordon-height {
+  height: 80vh;
+}
+
 @tailwind utilities;

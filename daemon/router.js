@@ -2,7 +2,32 @@ const express = require('express');
 const router = express.Router();
 
 const defaultCredential = { username: '', password: '' };
-const sessions = {};
+
+const sessions = {
+  tomy: 'tomy',
+  nikol: 'nikol',
+  keny: 'keny',
+  taylor: 'taylor',
+  spencer: 'spencer',
+  kat: 'kat',
+  juan: 'juan',
+  mika: 'mika',
+  sabrina: 'sabrina',
+  napoleon: 'napoleon',
+  alejandro: 'alejandro',
+  kan: 'kan',
+  choi: 'choi',
+  ben: 'ben',
+  camila: 'camila',
+  irene: 'irene',
+  ivy: 'ivy',
+  carly: 'carly',
+  neo: 'neo',
+  koji: 'koji',
+  jun: 'jun',
+  wade: 'wade',
+  jade: 'jade',
+};
 
 router.get('/', function(req, res) {
   res.send('Gordon Messaging App');
@@ -28,4 +53,7 @@ router.post('/identity', function(req, res) {
   return res.sendStatus(403);
 });
 
-module.exports = router;
+module.exports = {
+  router: router,
+  sessions: sessions,
+};

@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
 
-const router = require('./router');
+const { router, sessions } = require('./router');
 const PORT = process.env.PORT || 4000;
 
 const app = express();
@@ -18,6 +18,10 @@ io.on('connection', function(socket) {
 
   socket.on('disconnect', function() {
     console.log('disconnected user');
+  });
+
+  socket.on('users:get', function() {
+    socket.emit('users:list', sessions);
   });
 });
 

@@ -1,30 +1,20 @@
 import React, { useContext, Fragment, useState, useEffect } from 'react';
-import socketio from 'socket.io-client';
+import io from './io/context.js';
 
 import { Context } from './Router';
+import useIdentities from './io/useIndentities';
 import Button from './com/Button';
 
 function Gordon() {
-  const [users, setUsers] = useState([]);
+  const [users] = useIdentities();
   const [message, setMessage] = useState('');
   const { setRoute } = useContext(Context);
+  const socket =  useContext(io)
 
   useEffect(() => {
-    const io = socketio();
-
-    io.on('connect', () => {
-      io.emit('users:get');
-    });
-
-    io.on('users:list', (data) => {
-      setUsers(local => {
-        local.forEach((user) => (data[user] = true));
-        return Object.keys(data);
-      });
-    });
-
-    return () => io.close();
-  }, []);
+    socket.connect();
+    return () => socket.disconnect();
+  }, [socket]);
 
   return (
     <Fragment>

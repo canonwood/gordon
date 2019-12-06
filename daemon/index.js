@@ -23,6 +23,10 @@ io.on('connection', function(socket) {
   socket.on('users:get', function() {
     socket.emit('users:list', sessions);
   });
+
+  socket.on('message:push', function(message) {
+    console.log('message: ' + message);
+  });
 });
 
 server.listen(PORT, function() {

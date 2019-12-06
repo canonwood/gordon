@@ -1,19 +1,14 @@
-import React, { useContext, Fragment, useState, useEffect } from 'react';
-import io from './io/context.js';
+import React, { useContext, Fragment, useState } from 'react';
 
-import { Context } from './Router';
 import Button from './com/Button';
 import IdentitiesList from './com/IdentitiesList';
+import useSocket from './io/useSocket';
+import { Context } from './Router';
 
 function Gordon() {
   const [message, setMessage] = useState('');
   const { setRoute } = useContext(Context);
-  const socket =  useContext(io)
-
-  useEffect(() => {
-    socket.connect();
-    return () => socket.disconnect();
-  }, [socket]);
+  useSocket();
 
   return (
     <Fragment>

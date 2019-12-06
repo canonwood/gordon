@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import useAppState from '../useAppState';
 import socket from '../io/context';
+import MessageItem from './MessageItem';
 
 function MessagesCamp() {
   const [messages, setMessages] = useState([]);
@@ -21,8 +22,11 @@ function MessagesCamp() {
   });
 
   if (state.chat) {
-    const items = messages.map((message) => <li>{message.content}</li>);
-    return <ul className="flex-1">{items}</ul>;
+    const items = messages.map((message) => (
+      <MessageItem {...message} username={state.username} />
+    ));
+
+    return <ul className="px-4 flex-1">{items}</ul>;
   }
 
   return null;

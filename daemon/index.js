@@ -37,7 +37,11 @@ io.on('connection', function(socket) {
   });
 
   socket.on('message:push', function(message) {
-    console.log('message: ' + message);
+    const identity = session.getIdentity(message.to);
+
+    if (identity) {
+      io.to(identity.socketId).emit('message:new', message);
+    }
   });
 });
 

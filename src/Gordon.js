@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import Button from './com/Button';
 import IdentitiesList from './com/IdentitiesList';
 import MessageLauncher from './com/MessageLauncher';
+import MessagesCamp from './com/MessagesCamp';
 import useAppState from './useAppState';
 import useSocket from './io/useSocket';
 
@@ -20,7 +21,7 @@ function Gordon() {
 
       <div className="flex mx-auto max-w-4xl gordon-height bg-white border">
         <div className="flex flex-col w-2/3 border-r">
-          <div className="flex-1"></div>
+          <MessagesCamp />
           <MessageLauncher />
         </div>
 

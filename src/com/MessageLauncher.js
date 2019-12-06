@@ -17,7 +17,12 @@ function MessageLauncher() {
   const hasMessage = message.length > 0;
 
   const launchMessage = (e) => {
-    io.emit('message:push', message);
+    io.emit('message:push', {
+      content: message,
+      to: state.chat,
+      from: state.username,
+    });
+
     setMessage('');
   };
 

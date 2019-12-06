@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 
-import { Context } from './Router';
+import useAppState from './useAppState';
 import Button from './com/Button.js';
 
 function Identity() {
-  const { setRoute } = useContext(Context);
+  const [,mods] = useAppState();
   const [working, setWorking] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +33,7 @@ function Identity() {
           : Promise.reject(new Error(response.statusText)),
       )
       .then((response) => response.text())
-      .then(() => setRoute('app'))
+      .then(() => mods.setRoute('app'))
       .catch((e) => {
         setWorking(false);
         console.log(e);

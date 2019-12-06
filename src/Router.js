@@ -1,4 +1,6 @@
-import React, { createContext, useState } from 'react';
+import React, { useState } from 'react';
+
+import { Context } from './useAppState';
 
 function NotFound() {
   return (
@@ -8,17 +10,22 @@ function NotFound() {
   );
 }
 
-export const Context = createContext({});
-
 function Router(props) {
+  const [chat, setChat] = useState(null);
   const [route, setRoute] = useState('/');
   const { routes = {} } = props;
 
   const Component = routes[route] || NotFound;
 
   const value = {
-    route,
-    setRoute,
+    state: {
+      chat,
+      route,
+    },
+    mods: {
+      setChat,
+      setRoute,
+    },
   };
 
   return (

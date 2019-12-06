@@ -1,13 +1,13 @@
-import React, { useContext, Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import Button from './com/Button';
 import IdentitiesList from './com/IdentitiesList';
 import useSocket from './io/useSocket';
-import { Context } from './Router';
+import useAppState from './useAppState';
 
 function Gordon() {
   const [message, setMessage] = useState('');
-  const { setRoute } = useContext(Context);
+  const [, mods] = useAppState();
   useSocket();
 
   return (
@@ -36,7 +36,7 @@ function Gordon() {
       </div>
 
       <div className="mx-auto max-w-4xl text-right">
-        <Button onClick={() => setRoute('/')}>Sign Out</Button>
+        <Button onClick={() => mods.setRoute('/')}>Sign Out</Button>
       </div>
     </Fragment>
   );

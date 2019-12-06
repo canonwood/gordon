@@ -8,10 +8,25 @@ function useIdentities() {
   const io = useContext(socket);
 
   useEffect(() => {
-    function mergeIndentities(data) {
+    function mergeIdentities(data) {
+      return function merge(identity) {
+        const current = data[identity.username];
+
+        if (current) {
+          delete data[identity.username];
+          return Object.assign({}, identity, current);
+        }
+
+        return identity;
+      };
+    }
+
+    function mergeIdentitiesCallback(data) {
       setIdentities((current) => {
-        current.forEach((identity) => (data[identity] = true));
-        return Object.keys(data);
+        const updates = identities.map(mergeIdentities(data));
+        const values = Object.values(data);
+        const merges = values.reduce((all, next) => [...all, next], updates);
+        return merges;
       });
     }
 
@@ -19,11 +34,11 @@ function useIdentities() {
       io.emit('users:get');
     }
 
-    io.on('users:list', mergeIndentities);
+    io.on('users:list', mergeIdentitiesCallback);
     io.on('connect', connected);
 
     return () => {
-      io.off('users:list', mergeIndentities);
+      io.off('users:list', mergeIdentitiesCallback);
       io.off('connect', connected);
     };
   }, [io]);

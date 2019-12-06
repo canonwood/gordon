@@ -2,7 +2,8 @@ const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
 
-const { router, sessions } = require('./router');
+const session = require('./session');
+const router = require('./router');
 const PORT = process.env.PORT || 4000;
 
 const app = express();
@@ -21,7 +22,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('users:get', function() {
-    socket.emit('users:list', sessions);
+    socket.emit('users:list', session.getIdentities());
   });
 
   socket.on('message:push', function(message) {

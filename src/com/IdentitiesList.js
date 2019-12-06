@@ -8,11 +8,11 @@ function IdentitiesList() {
   const [state] = useAppState();
   const [users] = useIdentities();
 
-  const items = users.map((username) => (
+  const items = users.map((current) => (
     <IdentityItem
-      key={username}
-      username={username}
-      active={state.chat === username}
+      key={current.username}
+      username={current.username}
+      active={state.chat === current.username}
     />
   ));
 

@@ -2,14 +2,18 @@ import { useContext, useEffect } from 'react';
 
 import io from '../io/context';
 
-function useSocket() {
+function useSocket(username) {
   const socket = useContext(io);
 
   useEffect(() => {
-    socket.connect();
+    if (username) {
+      socket.io.opts.query = { username };
+      socket.connect();
+      return () => socket.disconnect();
+    }
 
-    return () => socket.disconnect();
-  }, [socket]);
+    return () => {};
+  }, [username, socket]);
 }
 
 export default useSocket;

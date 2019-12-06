@@ -33,7 +33,7 @@ function Identity() {
           : Promise.reject(new Error(response.statusText)),
       )
       .then((response) => response.text())
-      .then(() => mods.setRoute('app'))
+      .then(() => mods.login(username))
       .catch((e) => {
         setWorking(false);
         console.log(e);

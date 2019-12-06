@@ -7,8 +7,8 @@ import useAppState from './useAppState';
 import useSocket from './io/useSocket';
 
 function Gordon() {
-  const [, mods] = useAppState();
-  useSocket();
+  const [state, mods] = useAppState();
+  useSocket(state.username);
 
   return (
     <Fragment>
@@ -28,7 +28,7 @@ function Gordon() {
       </div>
 
       <div className="mx-auto max-w-4xl text-right">
-        <Button onClick={() => mods.setRoute('/')}>Sign Out</Button>
+        <Button onClick={mods.logout}>Sign Out</Button>
       </div>
     </Fragment>
   );

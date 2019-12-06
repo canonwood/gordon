@@ -11,6 +11,7 @@ function NotFound() {
 }
 
 function Router(props) {
+  const [username, setUsername] = useState('');
   const [chat, setChat] = useState(null);
   const [route, setRoute] = useState('/');
   const { routes = {} } = props;
@@ -21,10 +22,18 @@ function Router(props) {
     state: {
       chat,
       route,
+      username,
     },
     mods: {
       setChat,
-      setRoute,
+      login: (user) => {
+        setRoute('app');
+        setUsername(user);
+      },
+      logout: () => {
+        setRoute('/');
+        setUsername('');
+      },
     },
   };
 

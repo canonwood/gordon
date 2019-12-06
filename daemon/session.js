@@ -37,7 +37,7 @@ function getSocketId(username) {
 
 function setSocketId(username, socketId) {
   if (exists(username)) {
-    const identity = getIdentit(username);
+    const identity = getIdentity(username);
     identity.socketId = socketId;
   }
 }

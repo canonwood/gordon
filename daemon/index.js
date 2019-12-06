@@ -14,6 +14,17 @@ app.use(router);
 const server = http.createServer(app);
 const io = socketio(server);
 
+io.use(function(socket, next) {
+  const username = socket.handshake.query.username;
+
+  if (session.exists(username)) {
+    session.setSocketId(username, socket.id);
+    return next();
+  }
+
+  return next(new Error('Session error.'));
+});
+
 io.on('connection', function(socket) {
   console.log('a user connected');
 

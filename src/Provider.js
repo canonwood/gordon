@@ -41,6 +41,14 @@ function usersReducer(state, action) {
         const next = Object.assign({}, user, value);
         return { ...users, [key]: next };
       }, state);
+    case 'user:change':
+      return {
+        ...state,
+        [action.identity.username]: {
+          ...state[action.identity.username],
+          ...action.identity,
+        },
+      };
     default:
       throw new Error(
         `Unhandled reducer action ${action.type} in usersReducer`,
@@ -69,6 +77,7 @@ function reducer(state, action) {
           [action.username]: chatsReducer(state.chats[action.username], action),
         },
       };
+    case 'user:change':
     case 'users:merge':
       return { ...state, users: usersReducer(state.users, action) };
     case 'login':

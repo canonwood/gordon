@@ -11,14 +11,12 @@ function IdentitiesList() {
   const items = users.map((current) => (
     <IdentityItem
       key={current.username}
-      username={current.username}
+      {...current}
       active={state.chat === current.username}
     />
   ));
 
-  return (
-    <ul className="overflow-y-hidden w-1/3">{items}</ul>
-  );
+  return <ul className="overflow-y-hidden w-1/3">{items}</ul>;
 }
 
 export default IdentitiesList;

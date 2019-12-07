@@ -42,6 +42,10 @@ function setSocketId(username, socketId) {
   }
 }
 
+function setOnline(identity, status = true) {
+  identity.online = status;
+}
+
 module.exports = {
   create: create,
   exists: exists,
@@ -51,4 +55,5 @@ module.exports = {
   isIdentity: isIdentity,
   sessions: sessions,
   setSocketId: setSocketId,
+  setOnline: setOnline,
 };

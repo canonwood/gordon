@@ -19,6 +19,7 @@ io.use(function(socket, next) {
 
   if (session.exists(username)) {
     session.setSocketId(username, socket.id);
+    socket.identity = session.getIdentity(username);
     return next();
   }
 
@@ -28,8 +29,14 @@ io.use(function(socket, next) {
 io.on('connection', function(socket) {
   console.log('a user connected');
 
+  session.setOnline(socket.identity);
+  socket.broadcast.emit('user:change', socket.identity);
+
   socket.on('disconnect', function() {
     console.log('disconnected user');
+
+    session.setOnline(socket.identity, false);
+    socket.broadcast.emit('user:change', socket.identity);
   });
 
   socket.on('users:get', function() {

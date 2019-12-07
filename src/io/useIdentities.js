@@ -21,12 +21,18 @@ function useIdentities() {
       io.emit('users:get');
     }
 
+    function change(identity) {
+      dispatch({ type: 'user:change', identity });
+    }
+
     io.on('users:list', mergeIdentities);
     io.on('connect', connected);
+    io.on('user:change', change);
 
     return () => {
       io.off('users:list', mergeIdentities);
       io.off('connect', connected);
+      io.off('user:change', change);
     };
   }, [io, dispatch]);
 

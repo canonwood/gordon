@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import useStore from '../useStore';
 
 function IdentityItem(props) {
-  const { username, active } = props;
+  const { username, active, online } = props;
   const [, dispatch] = useStore();
 
   const classes = classnames(
@@ -23,7 +23,10 @@ function IdentityItem(props) {
     <li className={classes} onClick={action}>
       <span className="inline-block rounded-full w-10 h-10 bg-gray-300 border border-white"></span>
       <span className="ml-2">{username}</span>
-      <span className="ml-auto inline-block rounded-full w-2 h-2 bg-green-400"></span>
+
+      {online && (
+        <span className="ml-auto inline-block rounded-full w-2 h-2 bg-green-400"></span>
+      )}
     </li>
   );
 }

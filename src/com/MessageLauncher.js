@@ -6,24 +6,24 @@ import useStore from '../useStore';
 
 function MessageLauncher() {
   const io = useContext(socket);
-  const [state] = useStore();
-  const { chat } = state;
-  const [message, setMessage] = useState('');
+  const [state, dispatch] = useStore();
 
-  if (chat === null) {
+  const chat = state.chats[state.chat];
+
+  if (!chat) {
     return null;
   }
 
-  const hasMessage = message.length > 0;
+  const hasMessage = chat.message.length > 0;
 
   const launchMessage = (e) => {
     io.emit('message:push', {
-      content: message,
-      to: state.chat,
+      content: chat.message,
       from: state.username,
+      to: state.chat,
     });
 
-    setMessage('');
+    dispatch({ type: 'chat:message:set', value: '', chat: state.chat });
   };
 
   const buttonClasses = classnames(
@@ -39,10 +39,16 @@ function MessageLauncher() {
       <div className="flex overflow-hidden border rounded text-gray-800">
         <input
           className="w-full pl-2 py-1"
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) =>
+            dispatch({
+              type: 'chat:message:set',
+              value: e.target.value,
+              chat: state.chat,
+            })
+          }
           placeholder="Type your message"
           type="text"
-          value={message}
+          value={chat.message}
         />
 
         <button onClick={launchMessage} className={buttonClasses}>

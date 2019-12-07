@@ -1,49 +1,32 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
+import useStore from '../useStore';
 import socket from './context';
 
 function useIdentities() {
-  const [identities, setIdentities] = useState([]);
-
+  const [state, dispatch] = useStore();
+  const users = useMemo(() => Object.values(state.users), [state.users]);
   const io = useContext(socket);
 
   useEffect(() => {
     function mergeIdentities(data) {
-      return function merge(identity) {
-        const current = data[identity.username];
-
-        if (current) {
-          delete data[identity.username];
-          return Object.assign({}, identity, current);
-        }
-
-        return identity;
-      };
-    }
-
-    function mergeIdentitiesCallback(data) {
-      setIdentities((current) => {
-        const updates = current.map(mergeIdentities(data));
-        const values = Object.values(data);
-        const merges = values.reduce((all, next) => [...all, next], updates);
-        return merges;
-      });
+      dispatch({ type: 'users:merge', data });
     }
 
     function connected() {
       io.emit('users:get');
     }
 
-    io.on('users:list', mergeIdentitiesCallback);
+    io.on('users:list', mergeIdentities);
     io.on('connect', connected);
 
     return () => {
-      io.off('users:list', mergeIdentitiesCallback);
+      io.off('users:list', mergeIdentities);
       io.off('connect', connected);
     };
-  }, [io]);
+  }, [io, dispatch]);
 
-  return [identities];
+  return [users];
 }
 
 export default useIdentities;

@@ -5,13 +5,13 @@ import socket from '../io/context';
 import MessageItem from './MessageItem';
 
 function MessagesCamp() {
-  const [messages, setMessages] = useState([]);
-  const [state] = useStore();
+  const [state, dispatch] = useStore();
   const io = useContext(socket);
+  const chat = state.chats[state.chat];
 
   useEffect(() => {
     function onMessage(message) {
-      setMessages((all) => [...all, message]);
+      dispatch({ type: 'chat:camp:push', message, chat: state.chat });
     }
 
     io.on('message:new', onMessage);
@@ -21,8 +21,8 @@ function MessagesCamp() {
     };
   });
 
-  if (state.chat) {
-    const items = messages.map((message) => (
+  if (chat) {
+    const items = chat.camp.map((message) => (
       <MessageItem {...message} username={state.username} />
     ));
 

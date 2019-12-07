@@ -6,13 +6,13 @@ import useStore from '../useStore';
 
 function IdentitiesList() {
   const [state] = useStore();
-  useIdentities();
+  const [users] = useIdentities();
 
-  const items = state.users.map((current) => (
+  const items = users.map((current) => (
     <IdentityItem
-      key={state.username}
-      username={state.username}
-      active={state.chat === state.username}
+      key={current.username}
+      username={current.username}
+      active={state.chat === current.username}
     />
   ));
 

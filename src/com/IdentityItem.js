@@ -17,7 +17,7 @@ function IdentityItem(props) {
 
   const action = active
     ? () => {}
-    : () => dispatch({ type: 'chat-set', username });
+    : () => dispatch({ type: 'chat:set', username });
 
   return (
     <li className={classes} onClick={action}>

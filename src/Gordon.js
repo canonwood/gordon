@@ -4,12 +4,14 @@ import Button from './com/Button';
 import IdentitiesList from './com/IdentitiesList';
 import MessageLauncher from './com/MessageLauncher';
 import MessagesCamp from './com/MessagesCamp';
-import useStore from './useStore';
+import useMessages from './io/useMessages';
 import useSocket from './io/useSocket';
+import useStore from './useStore';
 
 function Gordon() {
   const [state, dispatch] = useStore();
   useSocket(state.username);
+  useMessages();
 
   return (
     <Fragment>

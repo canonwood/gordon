@@ -1,6 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Context } from './useAppState';
+import Gordon from './Gordon';
+import Identity from './Identity';
+import useStore from './useStore';
+
+const routes = {
+  '/': Identity,
+  app: Gordon,
+};
 
 function NotFound() {
   return (
@@ -10,38 +17,10 @@ function NotFound() {
   );
 }
 
-function Router(props) {
-  const [username, setUsername] = useState('');
-  const [chat, setChat] = useState(null);
-  const [route, setRoute] = useState('/');
-  const { routes = {} } = props;
-
-  const Component = routes[route] || NotFound;
-
-  const value = {
-    state: {
-      chat,
-      route,
-      username,
-    },
-    mods: {
-      setChat,
-      login: (user) => {
-        setRoute('app');
-        setUsername(user);
-      },
-      logout: () => {
-        setRoute('/');
-        setUsername('');
-      },
-    },
-  };
-
-  return (
-    <Context.Provider value={value}>
-      <Component />
-    </Context.Provider>
-  );
+function Router() {
+  const [state] = useStore();
+  const Component = routes[state.route] || NotFound;
+  return <Component />;
 }
 
 export default Router;

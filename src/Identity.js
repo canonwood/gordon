@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 
-import useAppState from './useAppState';
+import useStore from './useStore';
 import Button from './com/Button.js';
 
 function Identity() {
-  const [,mods] = useAppState();
+  const [, dispatch] = useStore();
   const [working, setWorking] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +33,7 @@ function Identity() {
           : Promise.reject(new Error(response.statusText)),
       )
       .then((response) => response.text())
-      .then(() => mods.login(username))
+      .then(() => dispatch({ type: 'login', username }))
       .catch((e) => {
         setWorking(false);
         console.log(e);

@@ -1,19 +1,15 @@
 import React from 'react';
 
 import Router from './Router';
-import Identity from './Identity';
-import Gordon from './Gordon';
-
-const routes = {
-  '/': Identity,
-  app: Gordon,
-};
+import { Provider } from './Provider';
 
 function App() {
   return (
-    <main className="h-screen pt-20">
-      <Router routes={routes} />
-    </main>
+    <Provider>
+      <main className="h-screen pt-20">
+        <Router />
+      </main>
+    </Provider>
   );
 }
 

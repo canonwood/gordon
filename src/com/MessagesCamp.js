@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import useAppState from '../useAppState';
+import useStore from '../useStore';
 import socket from '../io/context';
 import MessageItem from './MessageItem';
 
 function MessagesCamp() {
   const [messages, setMessages] = useState([]);
-  const [state] = useAppState();
+  const [state] = useStore();
   const io = useContext(socket);
 
   useEffect(() => {

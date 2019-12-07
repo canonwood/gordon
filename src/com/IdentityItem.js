@@ -1,11 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import useAppState from '../useAppState';
+import useStore from '../useStore';
 
 function IdentityItem(props) {
   const { username, active } = props;
-  const [, mods] = useAppState();
+  const [, dispatch] = useStore();
 
   const classes = classnames(
     'flex items-center px-3 py-2 border-b select-none',
@@ -15,7 +15,9 @@ function IdentityItem(props) {
     },
   );
 
-  const action = active ? () => {} : () => mods.setChat(username);
+  const action = active
+    ? () => {}
+    : () => dispatch({ type: 'chat-set', username });
 
   return (
     <li className={classes} onClick={action}>

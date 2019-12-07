@@ -1,18 +1,18 @@
 import React from 'react';
 
 import IdentityItem from './IdentityItem';
-import useAppState from '../useAppState';
 import useIdentities from '../io/useIndentities';
+import useStore from '../useStore';
 
 function IdentitiesList() {
-  const [state] = useAppState();
-  const [users] = useIdentities();
+  const [state] = useStore();
+  useIdentities();
 
-  const items = users.map((current) => (
+  const items = state.users.map((current) => (
     <IdentityItem
-      key={current.username}
-      username={current.username}
-      active={state.chat === current.username}
+      key={state.username}
+      username={state.username}
+      active={state.chat === state.username}
     />
   ));
 

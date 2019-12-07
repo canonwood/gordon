@@ -4,11 +4,11 @@ import Button from './com/Button';
 import IdentitiesList from './com/IdentitiesList';
 import MessageLauncher from './com/MessageLauncher';
 import MessagesCamp from './com/MessagesCamp';
-import useAppState from './useAppState';
+import useStore from './useStore';
 import useSocket from './io/useSocket';
 
 function Gordon() {
-  const [state, mods] = useAppState();
+  const [state, dispatch] = useStore();
   useSocket(state.username);
 
   return (
@@ -29,7 +29,7 @@ function Gordon() {
       </div>
 
       <div className="mx-auto max-w-4xl text-right">
-        <Button onClick={mods.logout}>Sign Out</Button>
+        <Button onClick={() => dispatch({ type: 'logout' })}>Sign Out</Button>
       </div>
     </Fragment>
   );

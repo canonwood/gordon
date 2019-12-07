@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import classnames from 'classnames';
 
 import socket from '../io/context';
-import useAppState from '../useAppState';
+import useStore from '../useStore';
 
 function MessageLauncher() {
   const io = useContext(socket);
-  const [state] = useAppState();
+  const [state] = useStore();
   const { chat } = state;
   const [message, setMessage] = useState('');
 

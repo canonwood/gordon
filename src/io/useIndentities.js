@@ -23,7 +23,7 @@ function useIdentities() {
 
     function mergeIdentitiesCallback(data) {
       setIdentities((current) => {
-        const updates = identities.map(mergeIdentities(data));
+        const updates = current.map(mergeIdentities(data));
         const values = Object.values(data);
         const merges = values.reduce((all, next) => [...all, next], updates);
         return merges;

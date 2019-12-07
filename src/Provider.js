@@ -21,6 +21,8 @@ function chatsReducer(state = chatInitialState, action) {
       return { ...state };
     case 'chat:message:set':
       return { ...state, message: action.value };
+    case 'chat:message:send':
+      return { ...state, message: '', camp: [...state.camp, action.message] };
     case 'chat:camp:push':
       return { ...state, camp: [...state.camp, action.message] };
     default:
@@ -50,6 +52,7 @@ function reducer(state, action) {
   switch (action.type) {
     case 'chat:camp:push':
     case 'chat:message:set':
+    case 'chat:message:send':
       return {
         ...state,
         chats: {

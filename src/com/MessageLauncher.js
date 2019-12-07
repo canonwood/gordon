@@ -17,13 +17,15 @@ function MessageLauncher() {
   const hasMessage = chat.message.length > 0;
 
   const launchMessage = (e) => {
-    io.emit('message:push', {
+    const message = {
       content: chat.message,
       from: state.username,
       to: state.chat,
-    });
+    };
 
-    dispatch({ type: 'chat:message:set', value: '', chat: state.chat });
+    io.emit('message:push', message);
+
+    dispatch({ type: 'chat:message:send', message, chat: state.chat });
   };
 
   const buttonClasses = classnames(

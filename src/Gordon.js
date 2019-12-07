@@ -20,12 +20,12 @@ function Gordon() {
       </div>
 
       <div className="flex mx-auto max-w-4xl gordon-height bg-white border">
-        <div className="flex flex-col w-2/3 border-r">
+        <IdentitiesList />
+
+        <div className="flex flex-col w-2/3 border-l">
           <MessagesCamp />
           <MessageLauncher />
         </div>
-
-        <IdentitiesList />
       </div>
 
       <div className="mx-auto max-w-4xl text-right">

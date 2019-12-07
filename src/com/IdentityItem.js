@@ -11,7 +11,7 @@ function IdentityItem(props) {
     'flex items-center px-3 py-2 border-b select-none',
     {
       'bg-white cursor-pointer hover:bg-gray-100': !active,
-      'bg-gray-300': active,
+      'bg-gray-100': active,
     },
   );
 

@@ -8,7 +8,7 @@ function useIdentities() {
   const users = useMemo(
     () =>
       Object.values(state.users).filter((i) => i.username !== state.username),
-    [state.users],
+    [state.users, state.username],
   );
   const io = useContext(socket);
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import classnames from 'classnames';
 
 import socket from '../io/context';
@@ -31,7 +31,7 @@ function MessageLauncher() {
   const buttonClasses = classnames(
     'border-l px-4 font-bold focus:outline-none',
     {
-      'text-gray-800': hasMessage,
+      'text-gray-800 bg-white': hasMessage,
       'text-gray-400': !hasMessage,
     },
   );
@@ -41,6 +41,7 @@ function MessageLauncher() {
       <div className="flex overflow-hidden border rounded text-gray-800">
         <input
           className="w-full pl-2 py-1"
+          onKeyUp={(e) => e.keyCode === 13 && hasMessage && launchMessage()}
           onChange={(e) =>
             dispatch({
               type: 'chat:message:set',

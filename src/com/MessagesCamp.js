@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import useStore from '../useStore';
 import socket from '../io/context';
@@ -26,7 +26,9 @@ function MessagesCamp() {
       <MessageItem {...message} username={state.username} />
     ));
 
-    return <ul className="px-4 flex-1">{items}</ul>;
+    return (
+      <ul className="flex flex-col overflow-y-auto px-4 mt-auto">{items}</ul>
+    );
   }
 
   return null;

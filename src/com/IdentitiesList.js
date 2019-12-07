@@ -1,7 +1,7 @@
 import React from 'react';
 
 import IdentityItem from './IdentityItem';
-import useIdentities from '../io/useIndentities';
+import useIdentities from '../io/useIdentities';
 import useStore from '../useStore';
 
 function IdentitiesList() {
@@ -17,7 +17,7 @@ function IdentitiesList() {
   ));
 
   return (
-    <ul className="overflow-y-hidden bg-gray-100 h-full w-1/3">{items}</ul>
+    <ul className="overflow-y-hidden w-1/3">{items}</ul>
   );
 }
 

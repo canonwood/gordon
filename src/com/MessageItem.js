@@ -8,7 +8,7 @@ function MessageItem(props) {
     'px-3 py-1 inline-block max-w-sm',
     'break-words rounded-t-lg',
     {
-      'bg-teal-200 rounded-br-lg': to === username,
+      'bg-primary text-white rounded-br-lg': to === username,
       'bg-white border text-gray-800 rounded-bl-lg': from === username,
     },
   );

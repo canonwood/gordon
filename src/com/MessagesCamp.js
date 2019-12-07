@@ -9,7 +9,7 @@ function MessagesCamp() {
 
   if (chat) {
     const items = chat.camp.map((message) => (
-      <MessageItem {...message} username={state.username} />
+      <MessageItem key={message.id} {...message} username={state.username} />
     ));
 
     return (

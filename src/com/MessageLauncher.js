@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import shortid from 'shortid';
 import classnames from 'classnames';
 
 import socket from '../io/context';
@@ -20,6 +21,7 @@ function MessageLauncher() {
     const message = {
       content: chat.message,
       from: state.username,
+      id: shortid.generate(),
       to: state.chat,
     };
 

@@ -17,7 +17,7 @@ function IdentitiesList() {
   ));
 
   return (
-    <ul className="overflow-y-scroll bg-gray-100 h-full w-1/3">{items}</ul>
+    <ul className="overflow-y-hidden bg-gray-100 h-full w-1/3">{items}</ul>
   );
 }
 

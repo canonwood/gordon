@@ -5,7 +5,11 @@ import socket from './context';
 
 function useIdentities() {
   const [state, dispatch] = useStore();
-  const users = useMemo(() => Object.values(state.users), [state.users]);
+  const users = useMemo(
+    () =>
+      Object.values(state.users).filter((i) => i.username !== state.username),
+    [state.users],
+  );
   const io = useContext(socket);
 
   useEffect(() => {

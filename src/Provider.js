@@ -13,9 +13,10 @@ const initialState = {
 const chatInitialState = {
   message: '',
   camp: [],
+  unread: 0,
 };
 
-function chatsReducer(state = chatInitialState, action) {
+function chatsReducer(state = chatInitialState, action, root) {
   switch (action.type) {
     case 'chat:set':
       return { ...state };
@@ -24,7 +25,16 @@ function chatsReducer(state = chatInitialState, action) {
     case 'chat:message:send':
       return { ...state, message: '', camp: [...state.camp, action.message] };
     case 'chat:camp:push':
-      return { ...state, camp: [...state.camp, action.message] };
+      return {
+        ...state,
+        camp: [...state.camp, action.message],
+        unread: state.unread + (root.chat === action.chat ? 0 : 1),
+      };
+    case 'chat:unread:reset':
+      return {
+        ...state,
+        unread: 0,
+      };
     default:
       throw new Error(
         `Unhandled reducer action ${action.type} in chatsReducer.`,
@@ -61,11 +71,12 @@ function reducer(state, action) {
     case 'chat:camp:push':
     case 'chat:message:set':
     case 'chat:message:send':
+    case 'chat:unread:reset':
       return {
         ...state,
         chats: {
           ...state.chats,
-          [action.chat]: chatsReducer(state.chats[action.chat], action),
+          [action.chat]: chatsReducer(state.chats[action.chat], action, state),
         },
       };
     case 'chat:set':

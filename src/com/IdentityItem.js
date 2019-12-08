@@ -2,9 +2,11 @@ import React from 'react';
 import classnames from 'classnames';
 
 import useStore from '../useStore';
+import MessagesCounter from './MessagesCounter';
+import IdentityStatus from './IdentityStatus';
 
 function IdentityItem(props) {
-  const { username, active, online } = props;
+  const { username, active, online, unread } = props;
   const [, dispatch] = useStore();
 
   const classes = classnames(
@@ -17,16 +19,20 @@ function IdentityItem(props) {
 
   const action = active
     ? () => {}
-    : () => dispatch({ type: 'chat:set', username });
+    : () => {
+        dispatch({ type: 'chat:set', username });
+        dispatch({ type: 'chat:unread:reset', chat: username });
+      };
 
   return (
     <li className={classes} onClick={action}>
       <span className="inline-block rounded-full w-10 h-10 bg-gray-300 border border-white"></span>
-      <span className="ml-2">{username}</span>
+      <span className="ml-2 mr-auto">{username}</span>
 
-      {online && (
-        <span className="ml-auto inline-block rounded-full w-2 h-2 bg-green-400"></span>
-      )}
+      <span className="self-stretch text-right">
+        <IdentityStatus online={online} />
+        <MessagesCounter count={unread} />
+      </span>
     </li>
   );
 }

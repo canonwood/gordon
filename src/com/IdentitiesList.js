@@ -13,6 +13,7 @@ function IdentitiesList() {
       key={current.username}
       {...current}
       active={state.chat === current.username}
+      unread={(state.chats[current.username] || { unread: 0 }).unread}
     />
   ));
 

@@ -6,9 +6,9 @@ function MessagesCounter({ count }) {
   }
 
   return (
-    <span className="px-1 py-px rounded-lg font-semibold text-xs leading-none text-white bg-green-400">
-      {count}
-    </span>
+    <div className="bg-red-600 flex h-5 items-center justify-center rounded-full w-5">
+      <span className="font-semibold text-white text-xs">{count}</span>
+    </div>
   );
 }
 

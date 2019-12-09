@@ -1,13 +1,16 @@
 import React from 'react';
+import classnames from 'classnames';
 
 function IdentityStatus({ online }) {
-  if (online) {
-    return (
-      <span className="block text-xs font-semibold text-green-400">ONLINE</span>
-    );
-  }
+  const classes = classnames(
+    'absolute rounded-full w-3 h-3 border border-gray-900',
+    {
+      'bg-gray-500': !online,
+      'bg-secondary': online,
+    },
+  );
 
-  return <span className="block text-xs font-semibold text-gray-400">OFFLINE</span>;
+  return <div className={classes} style={{ bottom: -1, left: -1 }}></div>;
 }
 
 export default IdentityStatus;

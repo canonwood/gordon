@@ -17,7 +17,11 @@ function IdentitiesList() {
     />
   ));
 
-  return <ul className="overflow-y-hidden w-1/3">{items}</ul>;
+  return (
+    <ul className="overflow-y-hidden w-1/3 bg-gray-900 text-gray-200">
+      {items}
+    </ul>
+  );
 }
 
 export default IdentitiesList;

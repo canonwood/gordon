@@ -10,10 +10,10 @@ function IdentityItem(props) {
   const [, dispatch] = useStore();
 
   const classes = classnames(
-    'flex items-center px-3 py-2 border-b select-none',
+    'flex items-center px-3 py-2 border-b border-gray-800 select-none h-16',
     {
-      'bg-white cursor-pointer hover:bg-gray-100': !active,
-      'bg-gray-100': active,
+      'cursor-pointer hover:bg-gray-700': !active,
+      'bg-gray-800': active,
     },
   );
 
@@ -26,13 +26,14 @@ function IdentityItem(props) {
 
   return (
     <li className={classes} onClick={action}>
-      <span className="inline-block rounded-full w-10 h-10 bg-gray-300 border border-white"></span>
-      <span className="ml-2 mr-auto">{username}</span>
-
-      <span className="self-stretch text-right">
+      <div className="relative">
+        <div className="rounded-full w-10 h-10 bg-gray-500"></div>
         <IdentityStatus online={online} />
-        <MessagesCounter count={unread} />
-      </span>
+      </div>
+
+      <span className="ml-4 mr-auto">{username}</span>
+
+      <MessagesCounter count={unread} />
     </li>
   );
 }

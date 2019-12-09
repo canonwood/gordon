@@ -15,12 +15,6 @@ function Gordon() {
 
   return (
     <Fragment>
-      <div className="py-2 mx-auto max-w-4xl bg-white border rounded-t -mb-1">
-        <p className="text-center text-lg font-semibold text-gray-600">
-          Gordon
-        </p>
-      </div>
-
       <div className="flex mx-auto max-w-4xl gordon-height bg-white border">
         <IdentitiesList />
 

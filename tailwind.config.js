@@ -3,7 +3,7 @@ module.exports = {
     extend: {
       colors: {
         primary: 'rgb(0, 122, 255)',
-        secondary: 'rgb(48, 209, 88)',
+        secondary: 'rgb(0, 255, 88)',
         gray: {
           '100': '#f5f5f5',
           '200': '#eeeeee',

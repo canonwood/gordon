@@ -6,14 +6,14 @@ import MessagesCounter from './MessagesCounter';
 import IdentityStatus from './IdentityStatus';
 
 function IdentityItem(props) {
-  const { username, active, online, unread } = props;
+  const { avatar, username, active, online, unread } = props;
   const [, dispatch] = useStore();
 
   const classes = classnames(
-    'flex items-center px-3 py-2 border-b border-gray-800 select-none h-16',
+    'flex items-center px-3 py-2 border-b border-gray-700 select-none h-16',
     {
       'cursor-pointer hover:bg-gray-700': !active,
-      'bg-gray-800': active,
+      'bg-gray-700': active,
     },
   );
 
@@ -27,7 +27,9 @@ function IdentityItem(props) {
   return (
     <li className={classes} onClick={action}>
       <div className="relative">
-        <div className="rounded-full w-10 h-10 bg-gray-500"></div>
+        <div className="rounded-full w-10 h-10 overflow-hidden bg-gray-600">
+          <img src={avatar} alt="" />
+        </div>
         <IdentityStatus online={online} />
       </div>
 

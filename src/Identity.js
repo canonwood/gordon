@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
+import md5 from 'md5';
 
 import useStore from './useStore';
 import Button from './com/Button.js';
@@ -24,6 +25,7 @@ function Identity() {
     const body = JSON.stringify({
       username,
       password,
+      avatar: `https://www.gravatar.com/avatar/${md5(username)}?default=identicon`
     });
 
     fetch('/identity', { method: 'post', body })

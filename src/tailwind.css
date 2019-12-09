@@ -9,4 +9,17 @@
   height: 80vh;
 }
 
+/* https://stackoverflow.com/a/49278385 */
+
+.no-scroll {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.no-scroll::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
+
 @tailwind utilities;
